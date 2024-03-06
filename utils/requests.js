@@ -16,4 +16,22 @@ async function fetchProperties() {
   }
 }
 
-export { fetchProperties };
+async function fetchProperty(id) {
+  try {
+    if (!apiDomain) {
+      return null;
+    }
+    const res = await fetch(
+      `${apiDomain}/properties/${id}`
+    );
+    if (!res.ok) {
+      throw new Error("An error occurred");
+    }
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export { fetchProperties, fetchProperty };
